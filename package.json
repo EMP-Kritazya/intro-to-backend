@@ -1,0 +1,27 @@
+{
+  "name": "intro-to-backend",
+  "version": "1.0.0",
+  "description": "learning backend",
+  "homepage": "https://github.com/EMP-Kritazya/intro-to-backend#readme",
+  "bugs": {
+    "url": "https://github.com/EMP-Kritazya/intro-to-backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EMP-Kritazya/intro-to-backend.git"
+  },
+  "license": "ISC",
+  "author": "Kritazya Upreti",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/src/index.js",
+    "dev": "nodemon backend/src/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "mongoose": "^9.2.1",
+    "nodemon": "^3.1.11"
+  }
+}
