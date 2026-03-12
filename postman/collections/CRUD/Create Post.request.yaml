@@ -1,0 +1,15 @@
+$kind: http-request
+name: Create Post
+url: http://localhost:4000/api/v1/posts/create
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+        "name": "marshmello",
+        "description": "over-hyped candy!fm",
+        "age": 20
+    }
+order: 1773327516934
