@@ -16,7 +16,7 @@ const registerUser = async (req, res) => {
     }
 
     // check password
-    if (length(password) < 8 || length(password) > 50) {
+    if (password.length < 8 || password.length > 50) {
       return res
         .status(400)
         .json({ message: "Password shall be between 8-50 characters" });
@@ -41,4 +41,39 @@ const registerUser = async (req, res) => {
   }
 };
 
-export { registerUser };
+const loginUser = async (req, res) => {
+  try {
+    // checking if the user already exists
+    const { email, password } = req.body;
+
+    const user = await User.findOne({
+      email: email.toLowerCase(),
+    });
+
+    if (!user)
+      return res.status(400).json({
+        message: "User not found",
+      });
+
+    // Compare passwords
+    const isMatched = await user.comparePassword(password);
+    if (!isMatched)
+      return res.status(401).json({
+        message: "Invalid Credentials",
+      });
+    res.status(200).json({
+      message: "User Logged In Successfully",
+      user: {
+        id: user.id,
+        email: user.email,
+        username: user.username,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+export { registerUser, loginUser };

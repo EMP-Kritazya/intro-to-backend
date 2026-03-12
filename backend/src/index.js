@@ -16,6 +16,12 @@ const startServer = async () => {
     app.listen(process.env.PORT || 8000, () => {
       console.log(`Server is running on port: ${process.env.PORT}`);
     });
+
+    // What .listen do?
+    /*
+      const http = require("http");
+      http.createServer(app).listen(process.env.PORT);
+     */
   } catch (error) {
     console.log("MongoDb connection failed!!", error);
   }
