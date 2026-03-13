@@ -10,7 +10,7 @@ const router = Router();
 
 router.route("/create").post(createPost);
 router.route("/getPosts").get(getPosts);
-router.route("/deletePosts").get(deletePosts);
+router.route("/deletePosts/:id").get(deletePosts);
 router.route("/update/:id").patch(updatePosts);
 
 export default router;

@@ -71,14 +71,19 @@ const deletePosts = async (req, res) => {
     const posts = await Post.find();
     console.log("Initial Posts: ", posts);
 
-    await Post.deleteMany();
+    const deleted = await Post.findByIdAndDelete(req.params.id);
+
+    if (!deleted)
+      return res.status(400).json({
+        message: "Post not found to delete",
+      });
 
     const newPosts = await Post.find();
     console.log("Updated Posts: ", newPosts);
 
     res.status(200).json({
-      message: "All Posts deleted",
-      posts: posts,
+      message: "Your post is successfully deleted",
+      posts: newPosts,
     });
   } catch (error) {
     return res.status(500).send({

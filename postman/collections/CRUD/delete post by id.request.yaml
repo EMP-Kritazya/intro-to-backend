@@ -1,5 +1,5 @@
 $kind: http-request
-name: delete all posts
+name: delete post by id
 url: http://localhost:4000/api/v1/posts/deletePosts
 method: GET
 order: 4277832584589911
