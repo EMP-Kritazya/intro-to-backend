@@ -17,6 +17,7 @@ const createPost = async (req, res) => {
 
     res.status(201).json({
       message: "Post Created Successfully",
+      post: post,
     });
   } catch (error) {
     return res.status(500).json({
@@ -38,11 +39,32 @@ const getPosts = async (req, res) => {
   }
 };
 
-const updatePosts = async (req, res)=>{
-  try{
+const updatePosts = async (req, res) => {
+  try {
     // basic validation to check if the body is empty
+    if (Object.keys(req.body).length === 0) {
+      return res.status(400).json({
+        message: "No data provided for update",
+      });
+    }
+    const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!post)
+      return res.status(404).json({
+        message: "User's post not found",
+      });
+    res.status(200).json({
+      message: "Post updated",
+      NewPost: await Post.find(),
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal Server Error",
+      error,
+    });
   }
-}
+};
 
 const deletePosts = async (req, res) => {
   try {
@@ -54,7 +76,10 @@ const deletePosts = async (req, res) => {
     const newPosts = await Post.find();
     console.log("Updated Posts: ", newPosts);
 
-    res.status(200).json(newPost);
+    res.status(200).json({
+      message: "All Posts deleted",
+      posts: posts,
+    });
   } catch (error) {
     return res.status(500).send({
       message: "Internal Server Erorr",
@@ -63,4 +88,4 @@ const deletePosts = async (req, res) => {
   }
 };
 
-export { createPost, getPosts, deletePosts };
+export { createPost, getPosts, deletePosts, updatePosts };

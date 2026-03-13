@@ -1,0 +1,15 @@
+$kind: http-request
+name: update post
+url: http://localhost:4000/api/v1/posts/update/69b36df07fa6085feec3330c
+method: PATCH
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+        "name": "marshmello's brother",
+        "description": "over-hyped candy! Can't agree more",
+        "age": 67
+    }
+order: 4325812600582539
