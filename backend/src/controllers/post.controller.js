@@ -38,4 +38,29 @@ const getPosts = async (req, res) => {
   }
 };
 
-export { createPost, getPosts };
+const updatePosts = async (req, res)=>{
+  try{
+    // basic validation to check if the body is empty
+  }
+}
+
+const deletePosts = async (req, res) => {
+  try {
+    const posts = await Post.find();
+    console.log("Initial Posts: ", posts);
+
+    await Post.deleteMany();
+
+    const newPosts = await Post.find();
+    console.log("Updated Posts: ", newPosts);
+
+    res.status(200).json(newPost);
+  } catch (error) {
+    return res.status(500).send({
+      message: "Internal Server Erorr",
+      error,
+    });
+  }
+};
+
+export { createPost, getPosts, deletePosts };
